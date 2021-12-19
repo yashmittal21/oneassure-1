@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<style type="text/css">
+		#container{
+		  text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
+		}
+	</style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body id="container">
+    <input type="file" id="fileUpload" class="file-upload-button" style="margin-left: 650px;"><br>
+    <button type="button" id="upload" value="Upload" onclick="Upload()" class="btn btn-success">Upload</button>
+  <hr>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script type="text/javascript">
+    function Upload(){
+        console.log("upload")
+        var fileUpload = document.getElementById("fileUpload");
+        var reader = new FileReader();
+        console.log(reader)
+        reader.onload = function (e){
+            console.log("reload")
+            var data1 = e.target.result;
+            data1 = JSON.parse(data1)
+
+            for(var key in data1){
+                console.log(key)
+                console.log(data1[key])
+            }
+            let data = new FormData(); 
+
+		
+                    data.append("data", JSON.stringify(data1))  //convert json objects into json string
+                    data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+                    
+                    axios.post('http://127.0.0.1:8000/index', data) 
+                    .then(res =>{
+                      console.log(res.data);
+                      if(res.data.message=="ok"){
+                        console.log(res.data.id + "id")
+                        window.location.href = "http://127.0.0.1:8000/dataset/" + res.data.id
+                      }
+                    }) 
+                    .catch(errors => console.log(errors)) 
+        }
+        reader.readAsText(fileUpload.files[0]);
+    }
+  	
+  </script>
+</body>
+</html>

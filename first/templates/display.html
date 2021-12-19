@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>display</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div>
+	  <ul>
+	  {% for item in all_data %}
+	  	<li><h3><button lass="btn btn-primary" style="background-color: white; border-color: white; border-width: 0 font-size: px">
+	  		<a href="http://127.0.0.1:8000/dataset/{{item.id}}">Dataset {{item.id}}</a></button></h3></li>
+	  {% endfor %}
+	</ul>
+	</div>
+	<script type="text/javascript">
+		for(var data in {{all_data}}){
+			console.log({{data}})
+		}
+	</script>
+</body>
+</html>

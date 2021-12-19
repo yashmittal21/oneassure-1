@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>dataset</title>
+	<style type="text/css">
+		#container{
+			margin-left: 20px;
+		}
+	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body id="container">
+	<h2>Dataset  {{data.id}}</h2>
+	<form action="{% url 'search_data' %}" method="post">
+		{% csrf_token %}
+		<input type="text" name="key">
+		<input type="hidden" name="id" value="{{data.id}}">
+		<button type="submit" class="btn btn-primary">search</button>
+	</form>	<br>
+	<strong>Enter the Valid Key whose value you want to change</strong>
+	<form action="{% url 'edit_data' %}" method="post">
+		{% csrf_token %}
+		<input type="text" name="key">
+		<input type="hidden" name="id" value="{{data.id}}">
+		<button type="submit" class="btn btn-primary">Edit</button>
+	</form><br><br>
+	{% for key,value in data.json_data.items %}
+	  	<li>{{key}} - {{value}}</li>
+	{% endfor %}
+	<br>
+	<form method="post" action="{% url 'delete_data' %}">
+		{% csrf_token %}
+		<button value="{{data.id}}" name="try" class="btn btn-danger">Delete</button>
+	</form>
+	<h3><a href="{% url 'display' %}">All Dataset</a>
+</body>
+</html>

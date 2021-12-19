@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		edit data
+	</title>
+	<style type="text/css">
+		#container{
+			text-align: center;
+	      	margin-top: 100px;
+	      	font-size: 20px;
+		}
+	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body id="container">
+	{% if value == 'Not present' %}
+	<h2>The key you want to edit dose not exist</h2>
+	{% else %}
+	<h2>Enter the value of {{key}}</h2><br>
+	<form action="{% url 'edit_data1' %}" method="post">
+		{% csrf_token %}
+		<input type="text" name="value">
+		<input type="hidden" name="id" value="{{data.id}}">
+		<input type="hidden" name="key" value="{{key}}">
+		<button type="submit" class="btn btn-primary">Edit</button>
+	</form>	
+	{% endif %}
+</body>
+</html>
