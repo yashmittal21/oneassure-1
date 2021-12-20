@@ -57,7 +57,7 @@ def search_data(request):
 				break
 		return render (request,'output.html',context)
 
-#this function is used to edi in a particular dataset for a given key
+#this function gets the key whose value we want to change
 def edit_data(request):
 	if request.method == 'POST':
 		data_id = request.POST['id']
@@ -72,6 +72,7 @@ def edit_data(request):
 				break
 		return render (request,'edit.html',context)
 
+#this function changes the value of the particular key
 def edit_data1(request):
 	if request.method == 'POST':
 		data_id = request.POST['id']
