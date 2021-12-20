@@ -1,4 +1,4 @@
-This is a basic web application in which we can upload csv files and can see their result in table form.
+This is a basic web application in which we can upload json files and can see their result in json format.
 
 
 ## set up to run project on local machine:-
